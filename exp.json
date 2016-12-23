@@ -2,7 +2,7 @@
   "name": "@shoutem/ui examples",
   "description": "Shoutem UI toolkit in Exponent",
   "slug": "shoutem-ui-examples",
-  "sdkVersion": "11.0.0",
+  "sdkVersion": "12.0.0",
   "version": "1.0.0",
   "orientation": "portrait",
   "primaryColor": "#cccccc",

@@ -43,7 +43,7 @@ class App extends React.Component {
     return (
       <View style={{flex: 1}}>
         <Examples />
-        <StatusBar hidden={true} />
+        <StatusBar barStyle="default" hidden={false} />
       </View>
     );
   }
