@@ -1,23 +1,16 @@
-import Exponent from 'exponent';
-import React from 'react';
-import {
-  StyleSheet,
-  StatusBar,
-  Text,
-  View,
-} from 'react-native';
-
-import { Font, Components } from 'exponent';
+import React, { Component } from 'react';
+import { StyleSheet, StatusBar, View } from 'react-native';
+import { AppLoading, Font } from 'expo';
 import { Examples } from '@shoutem/ui';
 
-console.disableYellowBox = true;
-
-class App extends React.Component {
+export default class App extends Component {
+  // set initial state
   state = {
-    fontsAreLoaded: false,
-  }
+    loaded: false,
+  };
 
   async componentWillMount() {
+    // load in fonts
     await Font.loadAsync({
       'Rubik-Black': require('./node_modules/@shoutem/ui/fonts/Rubik-Black.ttf'),
       'Rubik-BlackItalic': require('./node_modules/@shoutem/ui/fonts/Rubik-BlackItalic.ttf'),
@@ -32,21 +25,33 @@ class App extends React.Component {
       'rubicon-icon-font': require('./node_modules/@shoutem/ui/fonts/rubicon-icon-font.ttf'),
     });
 
-    this.setState({fontsAreLoaded: true});
+    // once loaded, update state
+    this.setState({
+      loaded: true
+    });
   }
 
   render() {
-    if (!this.state.fontsAreLoaded) {
-      return <Components.AppLoading />;
+    // if application is not yet loaded
+    if (!this.state.loaded) {
+      return (
+        <AppLoading />
+      );
     }
 
     return (
-      <View style={{flex: 1}}>
+      <View style={styles.container}>
+        <StatusBar barStyle="dark-content" hidden={false} />
         <Examples />
-        <StatusBar barStyle="default" hidden={false} />
       </View>
     );
   }
 }
 
-Exponent.registerRootComponent(App);
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#f2f2f2',
+    flex: 1,
+    paddingTop: 40,
+  },
+});
